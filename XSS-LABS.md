@@ -60,7 +60,79 @@ Direct in page = simple <script> works
 
 ---
 
-# XSS Lab 6 - Reflected XSS into attribute with angle brackets HTML-encoded
+# XSS Lab 4 - XSS into HTML context, blocking common tags
+
+## What was vulnerable
+Search field — but common tags were blocked.
+
+## What I did
+Tested different tags until img worked:
+```
+<img src=x onerror=alert(1)>
+```
+
+## Why it worked
+`<img>` tag was not blocked.
+`src=x` points to non-existent image.
+Browser triggers onerror event = alert fires.
+
+## Key lesson
+When `<script>` is blocked, try other tags.
+Always test what is and isn't filtered.
+
+---
+
+# XSS Lab 5 - DOM XSS in jQuery anchor href attribute sink
+
+## What was vulnerable
+Submit feedback page — "Back" link used returnPath
+parameter from URL and placed it into href attribute
+without sanitization.
+
+## What I did
+Changed returnPath in URL to:
+```
+javascript:alert(document.cookie)
+```
+Clicked "Back" link — alert fired with cookies.
+
+## Why it worked
+href attribute accepts javascript: protocol.
+jQuery took value from URL and put it directly
+into href without checking it.
+
+## Key lesson
+Always check URL parameters that end up in href.
+Look for: returnPath, redirect, next, url parameters.
+Impact: cookie theft = account takeover.
+
+---
+
+# XSS Lab 6 - DOM XSS via location.hash
+
+## What was vulnerable
+Page used location.hash to scroll to a blog post.
+If post didn't exist, page created a new element.
+
+## What I did
+Injected payload into URL hash:
+```
+#<img src=x onerror=print()>
+```
+
+## Why it worked
+Hash value never goes to server — only browser reads it.
+Page took hash value and inserted into DOM without
+sanitization. Missing image triggered onerror = print().
+
+## Key lesson
+location.hash is client-side only.
+Page must load first, then JavaScript reads the hash.
+Look for pages that scroll or load content based on hash.
+
+---
+
+# XSS Lab 7 - Reflected XSS into attribute with angle brackets HTML-encoded
 
 ## What was vulnerable
 Search field — user input was placed inside 
