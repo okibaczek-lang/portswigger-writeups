@@ -60,22 +60,41 @@ Direct in page = simple <script> works
 
 ---
 
-# XSS Lab 3 - Breaking out of attribute context
+# XSS Lab 6 - Reflected XSS into attribute with angle brackets HTML-encoded
 
-## Why simple <script> didn't work
-My input landed inside img src attribute.
-Browser treated it as image path, not code.
+## What was vulnerable
+Search field — user input was placed inside 
+a value attribute of an input tag:
+<input value="USER INPUT HERE">
+Angle brackets < > were blocked but quotes were not.
 
-## Solution
-Used "> to break out of the attribute first,
-then injected the script after it.
+## What I did
+Broke out of the value attribute using a quote,
+then injected a new event handler:
+" onmouseover="alert(1)
+
+Result in page source:
+<input value="" onmouseover="alert(1)">
+
+## Why it worked
+Closing quote escaped the value attribute.
+onmouseover fires when victim hovers over the element —
+no click required, higher chance of execution.
+
+## Why onmouseover over onclick
+onclick requires deliberate action from victim.
+onmouseover fires passively — victim just moves 
+the mouse near the search field.
+In real attacks, passive triggers are more reliable.
 
 ## Key lesson
-Always check where your input lands in HTML.
-Inside attribute = break out first with ">
-Direct in page = simple <script> works
-Much more dangerous than Reflected XSS.
+When < > are blocked, look for attribute injection.
+You don't need new HTML tags — inject events 
+into existing ones.
+Always think: will this work on the VICTIM'S browser,
+not just mine.
 
 ## Real world impact
-Attacker stores malicious script once —
-it steals cookies from every visitor automatically.
+Attacker crafts malicious URL with payload.
+Victim opens link, hovers over search field,
+script executes and steals session cookies.
