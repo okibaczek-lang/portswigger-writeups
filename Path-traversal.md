@@ -1,4 +1,4 @@
-## Patch Traversal LAB 1 - File path traversal, simple case
+## Path Traversal LAB 1 - File path traversal, simple case
 
 # What was vurnerable:
 
@@ -8,7 +8,7 @@ images of displayed products - the images are stored on /var/www/images/. Apllic
 
 I ,,manipulated" the path by using a bunch off ../ for example .//.//.//.// 
 
-.// basically means that i step up in filesystem 
+../ = go one directory up
 
 I added ../../../etc/passwd into URL after ...loadImage?filename=(payload here) and succesfully managed to get into files in root
 
