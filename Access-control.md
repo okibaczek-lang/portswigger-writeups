@@ -216,6 +216,10 @@ Although the browser followed the redirect, the sensitive data was still present
 ## How to detect in real pentest
 Don't trust redirects alone.
 Always inspect the full response body of 302/303 responses after modifying user IDs.
+
+---
+
+
 Look for leaked data such as API keys, tokens, emails, or personal information.
 
 ## Real world impact
