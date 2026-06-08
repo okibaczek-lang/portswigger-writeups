@@ -1,14 +1,26 @@
-## About this repository
+# PortSwigger Web Security Academy Writeups
 
-Here i document everything i did and im doing in order to learn and build my portfolio on portswigger labs
+This repository contains my writeups and notes from PortSwigger Web Security Academy labs.
 
-# What is portswigger??
+I use this platform to practice real-world web application security vulnerabilities in a controlled environment.
 
-Portswiger is an web security academy full of hands on labs where you have to exploit websites vulnerabillities in order to learn and solve the labs
+## What is PortSwigger Web Security Academy?
 
-In this repository you have writeups on how i managed to solve the labs and learn new things so i can build my cybersecurity profile
+PortSwigger Web Security Academy is a free online platform that provides hands-on labs focused on web application security.
 
-If you have questions or want to help me with something please contact me!!!
+The labs simulate real vulnerabilities where the goal is to identify and exploit security flaws to understand how they work in practice.
 
-## Bye👋
+## Repository content
 
+- Writeups from completed labs
+- Notes on vulnerability types
+- Exploitation steps and methodology
+- Personal learning documentation
+
+## Purpose
+
+This repository is part of my learning process to build practical skills in web application security and prepare for a future role as a Junior Pentester.
+
+## Contact
+
+Open to feedback, suggestions, or discussions related to web security.
